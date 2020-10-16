@@ -3,8 +3,19 @@ html, body {
   color: #36404A;
 }
 
-.form {
+p, button, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
   padding: 20px;
+}
+
+.tips {
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 10px;
 }
 
 label, textarea {
@@ -31,4 +42,26 @@ textarea::placeholder {
 
 textarea:focus {
   border-color: #FFB8B3;
+}
+
+.submit {
+  display: block;
+  width: 100%;
+  line-height: 36px;
+  border: none;
+  background: #fa4b3e;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 6px;
+  color: #FFF;
+}
+
+.footer {
+  font-size: 12px;
+  color: #CED2D6;
+  margin-top: 20px;
+}
+
+.footerText {
+  text-align: center;
 }
