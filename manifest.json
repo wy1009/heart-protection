@@ -1,0 +1,19 @@
+{
+  "name": "Heart Protection",
+  "description": "评论屏蔽器",
+  "manifest_version": 2,
+  "version": "0.1",
+  "homepage_url": "",
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
+
+  "permissions": [
+    "webRequest", "webRequestBlocking", "http://my.jjwxc.net/backend/novelcomment.php?action=getcommentlist"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
