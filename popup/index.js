@@ -16,6 +16,24 @@ const initForm = options => {
   })
 }
 
+// toast 方法
+const { body } = document
+const toast = document.createElement('div')
+toast.setAttribute('class', 'toast')
+let timer = null
+const showToast = (msg, timeout) => {
+  if (timer) {
+    clearTimeout(timer)
+    body.removeChild(toast)
+  }
+  toast.innerHTML = msg
+  body.appendChild(toast)
+  timer = setTimeout(() => {
+    body.removeChild(toast)
+    timer = null
+  }, timeout || 2000)
+}
+
 // 初始化表单
 browser.storage.local.get(keys).then(val => initForm(val))
 
@@ -28,4 +46,6 @@ document.querySelector('.form').addEventListener('submit', e => {
     userIds: e.target.userIds.value,
     keywords: e.target.keywords.value,
   })
+
+  showToast('修改成功~')
 })
