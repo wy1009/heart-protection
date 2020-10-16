@@ -22,6 +22,7 @@ const listener = (details) => {
     }
 
     const obj = JSON.parse(str)
+    console.log(browser.storage.local.get(['userNames', 'userIds']).then(val => console.log(val)))
     console.log(obj, 'obj')
     filter.write(encoder.encode(str))
     filter.close()

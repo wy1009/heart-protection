@@ -11,6 +11,7 @@
   "permissions": [
     "webRequest",
     "webRequestBlocking",
+    "storage",
     "http://my.jjwxc.net/backend/novelcomment.php?action=getcommentlist"
   ],
   "background": {
