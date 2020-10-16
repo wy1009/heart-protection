@@ -1,16 +1,5 @@
 const keys = ['userNames', 'userIds', 'keywords']
 
-let filters = {}
-browser.storage.local.get(keys).then(filterStrObj => {
-  keys.forEach(key => {
-    if (filterStrObj[key]) {
-      filters[key] = filterStrObj[key].split(',')
-    } else {
-      filters[key] = []
-    }
-  })
-})
-
 // 安全 parse
 const safeParse = str => {
   if (!str) {
@@ -27,7 +16,7 @@ const safeParse = str => {
 }
 
 // 判断评论是否应该展示
-const shouldShow = comment => {
+const shouldShow = ({ comment, filters }) => {
   if (filters.userIds.includes(comment.readerid)) {
     return false
   }
@@ -37,7 +26,7 @@ const shouldShow = comment => {
   }
 
   for (let i = 0; i < filters.keywords.length; i ++) {
-    if (comment.commentbody.indexOf(filters.keywords[i])) {
+    if (comment.commentbody.indexOf(filters.keywords[i]) !== -1) {
       return false
     }
   }
@@ -46,14 +35,14 @@ const shouldShow = comment => {
 }
 
 // 过滤列表
-const filterList = list => {
+const filterList = ({ list, filters }) => {
   let res = []
   if (Array.isArray(list)) {
     // 筛选回复
     res = list.map(comment => {
       let reply
       if (Array.isArray(comment.reply)) {
-        reply = comment.reply.filter(shouldShow)
+        reply = comment.reply.filter(comment => shouldShow({ comment, filters }))
       }
 
       return {
@@ -63,7 +52,7 @@ const filterList = list => {
     })
 
     // 筛选主评论
-    res = list.filter(shouldShow)
+    res = list.filter(comment => shouldShow({ comment, filters }))
   }
 
   return res
@@ -95,11 +84,22 @@ const listener = (details) => {
     // parse 对象进行过滤
     const obj = safeParse(str)
     const { list } = obj.data
-    obj.data.list = filterList(list)
-    str = JSON.stringify(obj)
+    let filters = {}
+    browser.storage.local.get(keys).then(filterStrObj => {
+      keys.forEach(key => {
+        if (filterStrObj[key]) {
+          filters[key] = filterStrObj[key].split(',')
+        } else {
+          filters[key] = []
+        }
+      })
 
-    filter.write(encoder.encode(str))
-    filter.close()
+      obj.data.list = filterList({ list, filters })
+      str = JSON.stringify(obj)
+
+      filter.write(encoder.encode(str))
+      filter.close()
+    })
   };
 }
 
