@@ -40,19 +40,19 @@ const filterList = ({ list, filters }) => {
   if (Array.isArray(list)) {
     // 筛选回复
     res = list.map(comment => {
-      let reply
+      let filteredReply
       if (Array.isArray(comment.reply)) {
-        reply = comment.reply.filter(comment => shouldShow({ comment, filters }))
+        filteredReply = comment.reply.filter(reply => shouldShow({ comment: reply, filters }))
       }
 
       return {
         ...comment,
-        reply,
+        reply: filteredReply,
       }
     })
 
     // 筛选主评论
-    res = list.filter(comment => shouldShow({ comment, filters }))
+    res = res.filter(comment => shouldShow({ comment, filters }))
   }
 
   return res
