@@ -9,7 +9,7 @@ p, button, h2 {
 }
 
 .container {
-  padding: 20px;
+  padding: 16px 20px 12px;
 }
 
 .tips {
@@ -64,4 +64,9 @@ textarea:focus {
 
 .footerText {
   text-align: center;
+  margin-top: 2px;
+}
+
+.author {
+  margin-top: 20px;
 }
