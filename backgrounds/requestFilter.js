@@ -88,7 +88,7 @@ const listener = (details) => {
     browser.storage.local.get(keys).then(filterStrObj => {
       keys.forEach(key => {
         if (filterStrObj[key]) {
-          filters[key] = filterStrObj[key].split(',')
+          filters[key] = filterStrObj[key].split(/,|，/)
         } else {
           filters[key] = []
         }
