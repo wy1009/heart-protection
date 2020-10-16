@@ -1,6 +1,9 @@
 // 预设项
 // 正常来讲应该连模板都通过预设项生成的，但是……
 // 连模板引擎都没有，还要啥自行车
+// 正常来讲应该放入公共部分导入各个文件的，但是……
+// Uncaught SyntaxError: import declarations may only appear at top level of a module
+// 算了算了，要啥自行车
 const keys = ['userNames', 'userIds', 'keywords']
 
 // 将配置作为默认项注入表单

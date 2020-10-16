@@ -1,3 +1,74 @@
+const keys = ['userNames', 'userIds', 'keywords']
+
+let filters = {}
+browser.storage.local.get(keys).then(filterStrObj => {
+  keys.forEach(key => {
+    if (filterStrObj[key]) {
+      filters[key] = filterStrObj[key].split(',')
+    } else {
+      filters[key] = []
+    }
+  })
+})
+
+// 安全 parse
+const safeParse = str => {
+  if (!str) {
+    return {}
+  }
+
+  try {
+    JSON.parse(str)
+  } catch (error) {
+    return {}
+  }
+
+  return JSON.parse(str)
+}
+
+// 判断评论是否应该展示
+const shouldShow = comment => {
+  if (filters.userIds.includes(comment.readerid)) {
+    return false
+  }
+
+  if (filters.userNames.includes(comment.commentauthor)) {
+    return false
+  }
+
+  for (let i = 0; i < filters.keywords.length; i ++) {
+    if (comment.commentbody.indexOf(filters.keywords[i])) {
+      return false
+    }
+  }
+
+  return true
+}
+
+// 过滤列表
+const filterList = list => {
+  let res = []
+  if (Array.isArray(list)) {
+    // 筛选回复
+    res = list.map(comment => {
+      let reply
+      if (Array.isArray(comment.reply)) {
+        reply = comment.reply.filter(shouldShow)
+      }
+
+      return {
+        ...comment,
+        reply,
+      }
+    })
+
+    // 筛选主评论
+    res = list.filter(shouldShow)
+  }
+
+  return res
+}
+
 const listener = (details) => {
   const filter = browser.webRequest.filterResponseData(details.requestId)
   const decoder = new TextDecoder('utf-8')
@@ -21,9 +92,12 @@ const listener = (details) => {
       }
     }
 
-    const obj = JSON.parse(str)
-    console.log(browser.storage.local.get(['userNames', 'userIds']).then(val => console.log(val)))
-    console.log(obj, 'obj')
+    // parse 对象进行过滤
+    const obj = safeParse(str)
+    const { list } = obj.data
+    obj.data.list = filterList(list)
+    str = JSON.stringify(obj)
+
     filter.write(encoder.encode(str))
     filter.close()
   };
