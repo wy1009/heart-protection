@@ -112,6 +112,6 @@ const listener = (details) => {
 
 browser.webRequest.onBeforeRequest.addListener(
   listener,
-  { urls: ["http://my.jjwxc.net/backend/novelcomment.php?action=getcommentlist"] },
+  { urls: ["*://my.jjwxc.net/backend/novelcomment.php?action=getcommentlist"] },
   ["blocking"]
 )

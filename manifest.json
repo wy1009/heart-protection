@@ -12,7 +12,7 @@
     "webRequest",
     "webRequestBlocking",
     "storage",
-    "http://my.jjwxc.net/backend/novelcomment.php?action=getcommentlist"
+    "*://my.jjwxc.net/backend/novelcomment.php?action=getcommentlist"
   ],
   "background": {
     "scripts": [
