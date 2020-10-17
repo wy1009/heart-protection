@@ -4,7 +4,7 @@
 // 正常来讲应该放入公共部分导入各个文件的，但是……
 // Uncaught SyntaxError: import declarations may only appear at top level of a module
 // 算了算了，要啥自行车
-const keys = ['userNames', 'userIds', 'keywords']
+const keys = ['userNames', 'userIds', 'minMark', 'keywords']
 
 // 将配置作为默认项注入表单
 const initForm = options => {
@@ -44,6 +44,7 @@ document.querySelector('.form').addEventListener('submit', e => {
   browser.storage.local.set({
     userNames: e.target.userNames.value,
     userIds: e.target.userIds.value,
+    minMark: e.target.minMark.value,
     keywords: e.target.keywords.value,
   })
 

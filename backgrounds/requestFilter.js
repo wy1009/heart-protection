@@ -1,4 +1,4 @@
-const keys = ['userNames', 'userIds', 'keywords']
+const keys = ['userNames', 'userIds', 'minMark', 'keywords']
 
 // 安全 parse
 const safeParse = str => {
@@ -22,6 +22,11 @@ const shouldShow = ({ comment, filters }) => {
   }
 
   if (filters.userNames.includes(comment.commentauthor)) {
+    return false
+  }
+
+  // 是主评论，且打分小于最小评分
+  if (!comment.floor && parseInt(comment.commentmark) < parseInt(filters.minMark)) {
     return false
   }
 
@@ -87,7 +92,9 @@ const listener = (details) => {
     let filters = {}
     browser.storage.local.get(keys).then(filterStrObj => {
       keys.forEach(key => {
-        if (filterStrObj[key]) {
+        if (key === 'minMark') {
+          filters[key] = filterStrObj[key]
+        } else if (filterStrObj[key]) {
           filters[key] = filterStrObj[key].split(/,|，/)
         } else {
           filters[key] = []
