@@ -2,7 +2,7 @@
   "name": "Heart Protection",
   "description": "评论屏蔽器",
   "manifest_version": 2,
-  "version": "0.2",
+  "version": "0.3",
   "homepage_url": "https://wy1009.github.io/",
   "icons": {
     "48": "icon.svg",
