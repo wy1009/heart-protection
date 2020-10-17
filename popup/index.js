@@ -48,5 +48,5 @@ document.querySelector('.form').addEventListener('submit', e => {
     keywords: e.target.keywords.value,
   })
 
-  showToast('修改成功~')
+  showToast('修改成功~请刷新页面查看效果')
 })

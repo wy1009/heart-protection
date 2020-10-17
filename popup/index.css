@@ -1,6 +1,7 @@
 html, body {
   width: 300px;
   color: #36404A;
+  overflow-x: hidden;
 }
 
 p, button, h2 {
@@ -9,23 +10,26 @@ p, button, h2 {
 }
 
 .container {
-  padding: 16px 20px 12px;
+  padding: 12px 20px;
+  box-sizing: border-box;
 }
 
-.tips {
-  display: block;
-  margin-top: 3px;
-  margin-bottom: 10px;
+.title {
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
-label, textarea, input {
+.formItem {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+label, textarea {
   display: block;
   width: 100%;
 }
 
 textarea, input {
-  margin-top: 6px;
-  margin-bottom: 20px;
   border-radius: 6px;
   background: #FAFBFC;
   padding: 6px 10px;
@@ -34,6 +38,25 @@ textarea, input {
   border: 1px solid transparent;
   line-height: 1.5;
   outline: none;
+}
+
+textarea {
+  margin-top: 6px;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+}
+
+.minMarkLabel {
+  width: auto;
+  flex: none;
+}
+
+#minMark {
+  flex: auto;
+  margin: 0;
 }
 
 textarea::placeholder,
@@ -61,7 +84,7 @@ input:focus {
 .footer {
   font-size: 12px;
   color: #CED2D6;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .footerText {
@@ -70,7 +93,7 @@ input:focus {
 }
 
 .author {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .toast {

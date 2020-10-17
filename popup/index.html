@@ -8,39 +8,29 @@
 
   <body>
     <article class="container">
+      <h2 class="title">请输入您的屏蔽条件</h2>
+
       <form class="form">
-        <h2 class="title">请输入您的屏蔽条件</h2>
-        <small class="tips">添加后，刷新页面方可生效</small>
+        <div class="formItem">
+          <label for="userNames">用户名：</label>
+          <textarea id="userNames" name="userNames" placeholder="多个请以逗号分隔"></textarea>
+        </div>
   
-        <label for="userNames">用户名：</label>
-        <textarea
-          id="userNames"
-          name="userNames"
-          placeholder="多个请以逗号分隔"
-        ></textarea>
-  
-        <label for="userIds">客户号：</label>
-        <textarea
-          id="userIds"
-          name="userIds"
-          placeholder="多个请以逗号分隔"
-        ></textarea>
+        <div class="formItem">
+          <label for="userIds">客户号：</label>
+          <textarea id="userIds" name="userIds" placeholder="多个请以逗号分隔"></textarea>
+        </div>
 
-        <label for="minMark">最低评分：</label>
-        <input
-          id="minMark"
-          name="minMark"
-          type="text"
-          placeholder="请输入数字"
-        />
+        <div class="formItem mark">
+          <label class="minMarkLabel" for="minMark">最低评分：</label>
+          <input id="minMark" name="minMark" type="text" placeholder="请输入数字" />
+        </div>
 
-        <label for="keywords">评论内容含关键字：</label>
-        <textarea
-          id="keywords"
-          name="keywords"
-          placeholder="多个请以逗号分隔"
-        ></textarea>
-  
+        <div class="formItem">
+          <label for="keywords">评论内容含关键字：</label>
+          <textarea id="keywords" name="keywords" placeholder="多个请以逗号分隔"></textarea>
+        </div>
+
         <button class="submit">确定</button>
       </form>
   
